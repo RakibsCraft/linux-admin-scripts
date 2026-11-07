@@ -1,0 +1,19 @@
+# Example schedule for these scripts. Install with: crontab -e
+# Fields: minute hour day-of-month month day-of-week command
+#
+# Adjust /opt/linux-admin-scripts to wherever you cloned the repo.
+
+# Check disk space every 15 minutes and log any problems.
+*/15 * * * *  /opt/linux-admin-scripts/scripts/disk_check.sh >> /var/log/admin/disk_check.log 2>&1
+
+# Check key services every 5 minutes.
+*/5 * * * *   /opt/linux-admin-scripts/scripts/process_monitor.sh sshd cron nginx >> /var/log/admin/services.log 2>&1
+
+# Back up the website every night at 01:30, keeping two weeks of backups.
+30 1 * * *    /opt/linux-admin-scripts/scripts/backup.sh -s /var/www -d /srv/backups -k 14 >> /var/log/admin/backup.log 2>&1
+
+# Rotate the app log every hour once it passes 10 MB.
+0 * * * *     /opt/linux-admin-scripts/scripts/log_rotate.sh -f /var/log/myapp/app.log -s 10240 -n 7
+
+# Audit user accounts every Monday at 08:00.
+0 8 * * 1     /opt/linux-admin-scripts/scripts/user_audit.sh >> /var/log/admin/user_audit.log 2>&1
