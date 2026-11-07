@@ -2,7 +2,7 @@
 
 ![Tests](https://github.com/RakibsCraft/linux-admin-scripts/actions/workflows/tests.yml/badge.svg)
 
-Bash scripts I'm building for routine Linux server administration: disk space checks, user account audits, backups, log rotation, service monitoring and a health summary. Each one is built to run unattended from cron and reports results with the exit codes monitoring tools such as Nagios and Zabbix expect.
+Bash scripts for routine Linux server administration: disk space checks, user account audits, backups, log rotation, service monitoring and a health summary. Each one is built to run unattended from cron and reports results with the exit codes monitoring tools such as Nagios and Zabbix expect.
 
 **Stack:** Bash, standard Linux tools (df, tar, stat, pgrep, awk), ShellCheck, GitHub Actions
 
@@ -16,6 +16,17 @@ Bash scripts I'm building for routine Linux server administration: disk space ch
 | `log_rotate.sh` | Rotates a log file once it reaches a size limit, keeping a set number of old copies |
 | `process_monitor.sh` | Checks that named services are running and reports their PIDs |
 | `system_report.sh` | One-screen summary of uptime, memory and disk usage |
+
+## Progress
+
+| Milestone | Script | Tests | Status |
+|---|---|---|---|
+| 1 | `scripts/disk_check.sh` | `tests/test_disk_check.sh` | Not started |
+| 2 | `scripts/user_audit.sh` | `tests/test_user_audit.sh` | Not started |
+| 3 | `scripts/backup.sh` | `tests/test_backup.sh` | Not started |
+| 4 | `scripts/log_rotate.sh` | `tests/test_log_rotate.sh` | Not started |
+| 5 | `scripts/process_monitor.sh` | `tests/test_process_monitor.sh` | Not started |
+| 6 | `scripts/system_report.sh` | `tests/test_system_report.sh` | Not started |
 
 ## Examples
 
@@ -75,7 +86,7 @@ The monitoring scripts follow the Nagios plugin convention, so they can plug str
 
 The tests use a small framework in `tests/lib.sh`, so they need nothing beyond Bash. They read sample files in `tests/fixtures/` (sample `df` output, `/etc/passwd`, `/proc/meminfo`) so results don't depend on the machine running them. Each test runs in its own temporary directory.
 
-Each test file has a `STARTED` switch at the top; tests for scripts not yet built are skipped. GitHub Actions runs the tests and ShellCheck on every push.
+Each test file has a `STARTED` switch at the top; tests for scripts not yet started are skipped. GitHub Actions runs the tests and ShellCheck on every push.
 
 ## Project structure
 
